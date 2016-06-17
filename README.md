@@ -8,6 +8,14 @@ When encrypting, the user is requested a password to generate the key and the na
 
 When decrypting, the user is requested only the password to generate the key.
 
+# development environment
+```
+sudo apt-get build-dep python-pygame
+pip install cython
+pip install hg+http://bitbucket.org/pygame/pygame
+pip install kivy
+```
+
 # todo
  - GUI (Kivy)
  - package for windows
