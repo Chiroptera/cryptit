@@ -9,6 +9,7 @@ from cryptography.hazmat.backends import default_backend
 from pickle import dump, dumps, load, loads
 
 import argparse
+from getpass import getpass
 
 backend = default_backend()
 
@@ -24,7 +25,7 @@ def encrypt(data):
         backend=backend
     )
 
-    key = base64.urlsafe_b64encode(kdf.derive(input('password: ').encode('utf-8')))
+    key = base64.urlsafe_b64encode(kdf.derive(getpass('password: ').encode('utf-8')))
     f = Fernet(key)
 
     epayload = f.encrypt(payload)
@@ -42,7 +43,7 @@ def decrypt(data, hello_token, salt):
         backend=backend
     )
 
-    key = base64.urlsafe_b64encode(kdf.derive(input('password: ').encode('utf-8')))
+    key = base64.urlsafe_b64encode(kdf.derive(getpass('password: ').encode('utf-8')))
     f = Fernet(key)
     hello = f.decrypt(hello_token)
     if hello != b'hello':
