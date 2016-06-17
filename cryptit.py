@@ -79,6 +79,18 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
+    if args.encrypt and args.decrypt:
+        print('Only one option should be chosen: encrypt or decrypt.')
+        sys.exit(0)
+
+    if not (args.encrypt or args.decrypt):
+        print('At least one option should be chosen: encrypt or decrypt.')
+        sys.exit(0)
+
+    if len(args.paths) < 1:
+        print('No file specified.')
+        sys.exit(0)
+
     if args.encrypt:
         files = args.paths
         files_content = {}
@@ -92,7 +104,7 @@ if __name__ == '__main__':
         dest_f = open(dest_path, 'wb')
         dump(dest_data, dest_f)
 
-    if args.decrypt:
+    elif args.decrypt:
         files = args.paths
         for file in files:
             try:
